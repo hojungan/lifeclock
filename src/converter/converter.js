@@ -38,6 +38,8 @@ function Converter() {
       case "soccer":
         ({ period, mins_in } = ageToSoccerGame(age));
         result = `${period} ${mins_in} minute(s)`;
+      default:
+        break;
     }
 
     result_elm.setAttribute("aria-live", "polite");
