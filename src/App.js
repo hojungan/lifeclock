@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Converter from "./converter/converter";
+import clock from "./alarm-clock.png";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="intro-container">
+        <div className="intro">
+          <img src={clock} className="hero-img" alt="" />
+          <p>
+            Life Clock is a concept that converts your age into another time
+            frame. <Link to="/help">See how Life Clock works</Link>
+          </p>
+          <p>See how your age converts into a day or sports</p>
+        </div>
+      </div>
+
+      <div className="converter">
+        <Converter></Converter>
+      </div>
+    </>
   );
 }
 

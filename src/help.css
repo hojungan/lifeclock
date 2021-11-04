@@ -1,0 +1,22 @@
+.help {
+    padding-inline: 1em;
+    padding-block: 2em;
+    max-width: 80ch;
+    margin: auto;
+}
+
+.help .concept,
+.help .conclusion {
+    margin-bottom: 1em;
+}
+
+.help .back {
+    padding: .5em 1em;
+    color: #fff;
+    background: #0a6bff;
+    border-radius: 2em;
+}
+
+.emoji.lg {
+    font-size: 1.5em;
+}

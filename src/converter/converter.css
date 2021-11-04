@@ -1,0 +1,60 @@
+form {
+    width: 45ch;
+    padding: 1em;
+    margin: auto;
+}
+
+form .control-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+form .control-group {
+    margin-bottom: 1em;
+}
+
+form .control-group select,
+form .control-group input {
+    width: 100%;
+    padding: .2em .6em;
+}
+
+form .btn {
+    border: 0;
+    border-radius: 50px;
+    padding: .4em .8em;
+    font-weight: bold;
+}
+
+form .btn.submit {
+    margin-right: 1em;
+    color: #fff;
+    background: #0a6bff;
+}
+
+form .btn.reset {
+    color: #fff;
+    background: #e62143;
+}
+
+form .buttons {
+    text-align: center;
+}
+
+.result {
+    width: 40ch;
+    margin: auto;
+    text-align: center;
+    background-color: #cfbaf0;
+    border-radius: 1rem;
+}
+
+.result p {
+    font-size: 1.5em;
+}
+
+.result.show-result {
+    padding: 1em;
+    color: #343a40;
+    border-radius: .8em;
+}
