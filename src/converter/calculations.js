@@ -138,7 +138,9 @@ const ageToSoccerGame = (age) => {
     period = "OT";
   }
 
-  return `<p>⚽ ${mins_in}<span class="sr-only">minutes</span>:${
+  return `<p>⚽ ${
+    mins_in < 10 ? `0${mins_in}` : mins_in
+  }<span class="sr-only">minutes</span>:${
     secs < 10 ? `0${secs}` : secs
   }<span class="sr-only">seconds</span> | ${period}</p>`;
 };
