@@ -22,3 +22,8 @@ header h1 {
 button {
   font-size: 16px;
 }
+
+.sr-only {
+  position: absolute;
+  left: -100%;
+}

@@ -1,4 +1,11 @@
+.info {
+    max-width: 50ch;
+    margin: auto;
+    text-align: center;
+}
+
 form {
+    max-width: 50ch;
     padding: 1em;
     margin: auto;
 }
@@ -41,11 +48,15 @@ form .buttons {
 }
 
 .result {
-    width: 40ch;
+    max-width: 50ch;
     margin: auto;
-    text-align: center;
     background-color: #cfbaf0;
     border-radius: 1rem;
+}
+
+.result .inner-container {
+    width: max-content;
+    margin: auto;
 }
 
 .result p {

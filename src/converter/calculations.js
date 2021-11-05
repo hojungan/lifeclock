@@ -24,7 +24,23 @@ const ageToMinutes = (age) => {
 
   let lifeInMinutes = ten_year * tenth + one_year * oneth;
 
-  return minutesToTime(lifeInMinutes);
+  let { hrs, mins } = minutesToTime(lifeInMinutes);
+  let ampm = hrs >= 12 && hrs < 24 ? "PM" : hrs <= 24 ? "AM" : "AM";
+
+  console.log(lifeInMinutes);
+
+  let _hrs;
+  if (hrs < 10) {
+    _hrs = `0${hrs}`;
+  } else if (hrs >= 12) {
+    _hrs = hrs - 12;
+
+    if (_hrs < 10) _hrs = `0${_hrs}`;
+  }
+
+  return `<p>⏰ ${_hrs}:${mins < 10 ? "0" + mins : mins} ${
+    lifeInMinutes < base ? ampm : `${ampm}+`
+  }</p>`;
 };
 
 const ageToHockeyGame = (age) => {
@@ -33,21 +49,21 @@ const ageToHockeyGame = (age) => {
   const yrs_per_period = Math.floor((avg_life / 3) * 10) / 10;
   const yrs_per_minute = Math.floor((yrs_per_period / 20) * 10) / 10;
 
-  const { hrs, mins } = minutesToTime(age / yrs_per_minute);
+  const { hrs, mins, secs } = minutesToTime(age / yrs_per_minute);
 
   let period = "";
   let mins_in = 0;
 
   if (mins <= 20 && hrs === 0) {
-    period = "1st";
+    period = "1ST";
     mins_in = mins;
   }
   if (mins >= 21 && hrs === 0) {
-    period = "2nd";
+    period = "2ND";
     mins_in = mins - 40 + 20;
   }
   if (mins >= 41 && hrs === 0) {
-    period = "3rd";
+    period = "3RD";
     mins_in = mins - 60 + 20;
   }
   if (mins >= 61 || hrs > 0) {
@@ -55,11 +71,11 @@ const ageToHockeyGame = (age) => {
     mins_in = hrs * 60 + mins - 60;
   }
 
-  return {
-    age,
-    period,
-    mins_in,
-  };
+  return `<p>🏒 ${
+    mins_in < 10 ? `0${mins_in}` : mins_in
+  }<span class="sr-only">minutes</span>:${
+    secs < 10 ? `0${secs}` : secs
+  }<span class="sr-only">seconds</span> | ${period}</p>`;
 };
 
 const ageToBasketballGame = (age) => {
@@ -67,63 +83,64 @@ const ageToBasketballGame = (age) => {
   const yrs_per_quarter = Math.floor((avg_life / 4) * 10) / 10;
   const yrs_per_minute = Math.floor((yrs_per_quarter / 10) * 10) / 10;
 
-  const { hrs, mins } = minutesToTime(age / yrs_per_minute);
+  const { hrs, mins, secs } = minutesToTime(age / yrs_per_minute);
 
-  let period = "";
+  let quarter = "";
   let mins_in = 0;
 
   if (mins <= 10) {
-    period = "1st";
+    quarter = "1st";
     mins_in = mins;
   }
   if (mins >= 11) {
-    period = "2nd";
+    quarter = "2nd";
     mins_in = mins - 20 + 10;
   }
   if (mins >= 21) {
-    period = "3rd";
+    quarter = "3rd";
     mins_in = mins - 30 + 10;
   }
   if (mins >= 31) {
-    period = "4th";
+    quarter = "4th";
     mins_in = mins - 40 + 10;
   }
   if (mins >= 41 || hrs > 0) {
-    period = "OT";
+    quarter = "OT";
     mins_in = hrs * 40 + mins - 40;
   }
 
-  return {
-    period,
-    mins_in,
-  };
+  return `<p>🏀 ${
+    mins_in < 10 ? `0${mins_in}` : mins_in
+  }<span class="sr-only">minutes</span>:${
+    secs < 10 ? `0${secs}` : secs
+  }<span class="sr-only">seconds</span> | ${quarter}</p>`;
 };
 
 const ageToSoccerGame = (age) => {
-  const half = 45;
+  const avg_life = 100;
+  const yrs_per_half = Math.floor((avg_life / 2) * 10) / 10;
+  const yrs_per_minute = Math.floor((yrs_per_half / 45) * 10) / 10;
+
+  const { hrs, mins, secs } = minutesToTime(age / yrs_per_minute);
 
   let period = "";
-  let mins_in = 0;
+  let mins_in = hrs * 60 + mins;
 
-  if (age <= half) {
-    period = "First half";
-    mins_in = age;
+  if (mins_in <= 45) {
+    period = "First";
   }
 
-  if (age > half) {
-    period = "Second half";
-    mins_in = age - half;
+  if (mins_in > 45) {
+    period = "Second";
   }
 
-  if (age > 90) {
+  if (mins_in >= 90) {
     period = "OT";
-    mins_in = age - 90;
   }
 
-  return {
-    period,
-    mins_in,
-  };
+  return `<p>⚽ ${mins_in}<span class="sr-only">minutes</span>:${
+    secs < 10 ? `0${secs}` : secs
+  }<span class="sr-only">seconds</span> | ${period}</p>`;
 };
 
 export { ageToMinutes, ageToHockeyGame, ageToBasketballGame, ageToSoccerGame };

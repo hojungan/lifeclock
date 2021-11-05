@@ -12,40 +12,27 @@ function Converter() {
     event.preventDefault();
 
     const result_elm = document.querySelector(".result");
+    result_elm.innerHTML = "";
 
-    const clock_type = event.target.elements.type.value;
     const age = event.target.elements.age.value;
 
-    let result = null;
-    let period, mins_in;
+    let _result = [];
+    _result.push(ageToMinutes(age));
+    _result.push(ageToHockeyGame(age));
+    _result.push(ageToBasketballGame(age));
+    _result.push(ageToSoccerGame(age));
 
-    switch (clock_type) {
-      case "day":
-        let { hrs, mins } = ageToMinutes(age);
-        let ampm = hrs >= 12 ? "PM" : "AM";
-        result = `${hrs > 12 ? hrs - 12 : hrs}:${
-          mins < 10 ? "0" + mins : mins
-        } ${ampm}`;
-        break;
-      case "hockey":
-        ({ period, mins_in } = ageToHockeyGame(age));
-        result = `${period} period ${mins_in} minute(s)`;
-        break;
-      case "basketball":
-        ({ period, mins_in } = ageToBasketballGame(age));
-        result = `${period} quarter ${mins_in} minute(s)`;
-        break;
-      case "soccer":
-        ({ period, mins_in } = ageToSoccerGame(age));
-        result = `${period} ${mins_in} minute(s)`;
-        break;
-      default:
-        break;
-    }
+    let inner_container = document.createElement("div");
+    inner_container.classList.add("inner-container");
+
+    _result.forEach((msg) => {
+      inner_container.innerHTML += msg;
+    });
 
     result_elm.setAttribute("aria-live", "polite");
     result_elm.classList.add("show-result");
-    result_elm.innerHTML = `<p>${result}</p>`;
+
+    result_elm.appendChild(inner_container);
   };
 
   const clearMsg = () => {
@@ -58,16 +45,10 @@ function Converter() {
 
   return (
     <>
+      <div className="info">
+        <p>Calculation is based on average age of 100 years</p>
+      </div>
       <form onSubmit={formSubmit}>
-        <div className="control-group">
-          <label htmlFor="type">Clock Type:</label>
-          <select name="type" id="type" required aria-required="true">
-            <option value="day">🕔 24 Hour Clock</option>
-            <option value="hockey">🏒 Ice Hockey</option>
-            <option value="basketball">🏀 Basketball</option>
-            <option value="soccer">⚽ Soccer</option>
-          </select>
-        </div>
         <div className="control-group">
           <label htmlFor="age">Your Age:</label>
           <input
@@ -75,7 +56,6 @@ function Converter() {
             id="age"
             name="age"
             min="0"
-            max="100"
             required
             aria-required="true"
           />
