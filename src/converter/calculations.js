@@ -29,13 +29,10 @@ const ageToMinutes = (age) => {
 
   console.log(lifeInMinutes);
 
-  let _hrs;
-  if (hrs < 10) {
-    _hrs = `0${hrs}`;
-  } else if (hrs >= 12) {
-    _hrs = hrs - 12;
+  let _hrs = hrs < 12 ? hrs : hrs - 12;
 
-    if (_hrs < 10) _hrs = `0${_hrs}`;
+  if (_hrs < 10) {
+    _hrs = `0${hrs}`;
   }
 
   return `<p>⏰ ${_hrs}:${mins < 10 ? "0" + mins : mins} ${
