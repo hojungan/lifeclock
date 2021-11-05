@@ -89,19 +89,19 @@ const ageToBasketballGame = (age) => {
   let mins_in = 0;
 
   if (mins <= 10) {
-    quarter = "1st";
+    quarter = "1ST";
     mins_in = mins;
   }
   if (mins >= 11) {
-    quarter = "2nd";
+    quarter = "2ND";
     mins_in = mins - 20 + 10;
   }
   if (mins >= 21) {
-    quarter = "3rd";
+    quarter = "3RD";
     mins_in = mins - 30 + 10;
   }
   if (mins >= 31) {
-    quarter = "4th";
+    quarter = "4TH";
     mins_in = mins - 40 + 10;
   }
   if (mins >= 41 || hrs > 0) {
